@@ -56,7 +56,7 @@ describe('Exception Remote Logger:', function () {
   beforeEach(function () {
 
     // Load the module the factory belongs to
-    module('dashboard');
+    module('angular-remote-logger');
 
     //Mock httpInterceptor dependency through ioc container
     module(function ($provide) {

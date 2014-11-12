@@ -30,7 +30,6 @@ var cliTestOptions = {
 function buildTestFilelist() {
   var bowerDeps = $.wiredep({
     directory: 'src/bower_components',
-    exclude: ['modernizr.js'],
     dependencies: true,
     devDependencies: true
   });
@@ -38,8 +37,7 @@ function buildTestFilelist() {
   var testFiles = bowerDeps.js.concat([
     'test/unit/**/*.js',
     'test/mocks/**/*.js',
-    'test/mocks/globals.js',
-    'src/{app,components}/**/*.js',
+    'src/*.js',
   ]);
 
   return testFiles;

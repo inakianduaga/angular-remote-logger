@@ -41,6 +41,7 @@
     "gulp-karma": "^0.0.4",
     "main-bower-files": "^2.0.0",
     "jshint-stylish": "^0.4.0",
+    "gulp-concat" : "^2.4.1",
     "wiredep": "^1.8.5",
     "karma-jasmine": "0.2.3",
     "karma-phantomjs-launcher": "^0.1.4",

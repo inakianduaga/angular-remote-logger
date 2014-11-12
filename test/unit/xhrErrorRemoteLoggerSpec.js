@@ -17,7 +17,7 @@ describe('Http Interceptor:', function () {
     httpInterceptorPostUrl= dashboard.settings.routes.other.remoteLogging;
 
     // Load the module the factory belongs to
-    module('dashboard');
+    module('angular-remote-logger');
 
     //Access request service and dependencies
     inject(function (_httpInterceptor_, _$http_, _$httpBackend_, _$rootScope_) {
