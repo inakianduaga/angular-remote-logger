@@ -55,12 +55,7 @@ describe('Exception Remote Logger:', function () {
 
   beforeEach(function () {
 
-    // Load the module & mock configuration
     module('angular-remote-logger');
-
-    module(function ($provide) {
-      $provide.value('EXCEPTION_LOGGER_CONFIG', configuration.EXCEPTION_LOGGER_CONFIG);
-    });
 
     //Access request service and dependencies
     inject(function (_$httpBackend_, _$rootScope_, _$exceptionHandler_, _EXCEPTION_LOGGER_CONFIG_, angularRemoteLoggerConfigurator) {
@@ -69,6 +64,7 @@ describe('Exception Remote Logger:', function () {
       $httpBackend = _$httpBackend_;
       $exceptionHandler = _$exceptionHandler_;
 
+      //Mock configuration
       angularRemoteLoggerConfigurator.exceptionLogger.replace(configuration.EXCEPTION_LOGGER_CONFIG);
       REMOTE_LOG_URL = _EXCEPTION_LOGGER_CONFIG_.remoteLogUrl;
       EXCEPTION_LOGGER_CONFIG = _EXCEPTION_LOGGER_CONFIG_;

@@ -9,14 +9,8 @@ angular
     function ($provide, EXCEPTION_LOGGER_CONFIG) {
 
       var throttle = {
-        config : {
-          windowInSeconds : EXCEPTION_LOGGER_CONFIG.windowInSeconds,
-          maxExceptionsPerWindow : EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow
-        },
         history : {}
       };
-
-      var remoteLogUrl = EXCEPTION_LOGGER_CONFIG.remoteLogUrl;
 
     /**
      * Whether the logging should be skipped or not because there have been too many logged errors within the last window
@@ -33,13 +27,13 @@ angular
       throttle.history[currentSeconds] = (currentSeconds in throttle.history) ? throttle.history[currentSeconds] + 1 : 1;
 
       //Check if we've had too many logged in exceptions within the current window
-      for (var i = currentSeconds - throttle.config.windowInSeconds + 1; i <= currentSeconds; i++) {
+      for (var i = currentSeconds - EXCEPTION_LOGGER_CONFIG.windowInSeconds + 1; i <= currentSeconds; i++) {
         if(i in throttle.history) {
           loggedExceptionsCount  += throttle.history[i];
         }
       }
 
-      return loggedExceptionsCount > throttle.config.maxExceptionsPerWindow;
+      return loggedExceptionsCount > EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow;
     }
 
     /* Add decorator to the provider */
@@ -54,7 +48,7 @@ angular
 
             var config = {
               method: 'post',
-              url: remoteLogUrl,
+              url: EXCEPTION_LOGGER_CONFIG.remoteLogUrl,
               data : {
                 exception : exception,
                 cause : cause
@@ -76,7 +70,7 @@ angular
           if(!shouldThrottle()) {
             remotelyLogException(exception, cause);
           } else {
-            console.log('Too many exceptions in the last '+throttle.config.windowInSeconds+' seconds, skipping remote logging');
+            console.log('Too many exceptions in the last '+ EXCEPTION_LOGGER_CONFIG.windowInSeconds +' seconds, skipping remote logging');
           }
 
           //Chain along
