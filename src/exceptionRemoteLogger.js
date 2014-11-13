@@ -5,11 +5,6 @@
  */
 angular
   .module('angular-remote-logger')
-  .constant('EXCEPTION_LOGGER_CONFIG', {
-    windowInSeconds : 5,
-    maxExceptionsPerWindow : 4, //max # of exceptions we log in the window interval
-    remoteLogUrl: 'localhost'
-  })
   .config(['$provide', 'EXCEPTION_LOGGER_CONFIG',
     function ($provide, EXCEPTION_LOGGER_CONFIG) {
 

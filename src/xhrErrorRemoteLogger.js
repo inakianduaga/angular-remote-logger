@@ -4,9 +4,6 @@
  */
 angular
   .module('angular-remote-logger')
-  .constant('XHR_LOGGER_CONFIG', {
-    remoteLogUrl : 'localhost'
-  })
   .factory('httpInterceptor',
     ['$q', '$injector','$rootScope', 'XHR_LOGGER_CONFIG',
     function($q, $injector,  $rootScope, XHR_LOGGER_CONFIG){

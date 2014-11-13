@@ -37,7 +37,7 @@ function buildTestFilelist() {
   var testFiles = bowerDeps.js.concat([
     'test/unit/**/*.js',
     'test/mocks/**/*.js',
-    'src/app.js',
+    'src/app.js', //call manually first
     'src/*.js',
   ]);
 

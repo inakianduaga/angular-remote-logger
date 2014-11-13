@@ -63,11 +63,13 @@ describe('Exception Remote Logger:', function () {
     });
 
     //Access request service and dependencies
-    inject(function (_$httpBackend_, _$rootScope_, _$exceptionHandler_, _EXCEPTION_LOGGER_CONFIG_) {
+    inject(function (_$httpBackend_, _$rootScope_, _$exceptionHandler_, _EXCEPTION_LOGGER_CONFIG_, angularRemoteLoggerConfigurator) {
 
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $exceptionHandler = _$exceptionHandler_;
+
+      angularRemoteLoggerConfigurator.exceptionLogger.replace(configuration.EXCEPTION_LOGGER_CONFIG);
       REMOTE_LOG_URL = _EXCEPTION_LOGGER_CONFIG_.remoteLogUrl;
       EXCEPTION_LOGGER_CONFIG = _EXCEPTION_LOGGER_CONFIG_;
 
