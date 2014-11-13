@@ -7,18 +7,21 @@ angular
   .module('angular-remote-logger')
   .constant('EXCEPTION_LOGGER_CONFIG', {
     windowInSeconds : 5,
-    maxExceptionsPerWindow : 4 //max # of exceptions we log in the window interval
+    maxExceptionsPerWindow : 4, //max # of exceptions we log in the window interval
+    remoteLogUrl: 'localhost'
   })
   .config(['$provide', 'EXCEPTION_LOGGER_CONFIG',
     function ($provide, EXCEPTION_LOGGER_CONFIG) {
 
-    var throttle = {
-      config : {
-        windowInSeconds : EXCEPTION_LOGGER_CONFIG.windowInSeconds,
-        maxExceptionsPerWindow : EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow
-      },
-      history : {}
-    };
+      var throttle = {
+        config : {
+          windowInSeconds : EXCEPTION_LOGGER_CONFIG.windowInSeconds,
+          maxExceptionsPerWindow : EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow
+        },
+        history : {}
+      };
+
+      var remoteLogUrl = EXCEPTION_LOGGER_CONFIG.remoteLogUrl;
 
     /**
      * Whether the logging should be skipped or not because there have been too many logged errors within the last window
@@ -48,8 +51,6 @@ angular
     $provide.decorator('$exceptionHandler',
       ['$delegate', '$injector',
       function($delegate, $injector) {
-
-        var remoteLogUrl = $injector.get('settings').getRemoteLogUrl();
 
         /**
          * Logs an exception remotely

@@ -8,8 +8,8 @@ angular
     remoteLogUrl : 'localhost'
   })
   .factory('httpInterceptor',
-    ['$q', '$injector','settings', '$rootScope', 'XHR_LOGGER_CONFIG',
-    function($q, $injector, settings, $rootScope, XHR_LOGGER_CONFIG){
+    ['$q', '$injector','$rootScope', 'XHR_LOGGER_CONFIG',
+    function($q, $injector,  $rootScope, XHR_LOGGER_CONFIG){
 
       'use strict';
 
@@ -18,8 +18,7 @@ angular
       /**
        * Logs a request error into the server
        *
-       * @param  {[type]} rejection [description]
-       * @return {[type]}           [description]
+       * @param  {object} rejection
        */
       function remotelyLogXHRException(rejection) {
 

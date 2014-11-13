@@ -55,12 +55,11 @@ describe('Exception Remote Logger:', function () {
 
   beforeEach(function () {
 
-    // Load the module the factory belongs to
+    // Load the module & mock configuration
     module('angular-remote-logger');
 
-    //Mock httpInterceptor dependency through ioc container
     module(function ($provide) {
-      $provide.value('EXCEPTION_LOGGER_CONFIG', EXCEPTION_LOGGER_CONFIG);
+      $provide.value('EXCEPTION_LOGGER_CONFIG', configuration.EXCEPTION_LOGGER_CONFIG);
     });
 
     //Access request service and dependencies
@@ -69,7 +68,7 @@ describe('Exception Remote Logger:', function () {
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $exceptionHandler = _$exceptionHandler_;
-      REMOTE_LOG_URL = dashboard.settings.routes.other.remoteLogging;
+      REMOTE_LOG_URL = _EXCEPTION_LOGGER_CONFIG_.remoteLogUrl;
       EXCEPTION_LOGGER_CONFIG = _EXCEPTION_LOGGER_CONFIG_;
 
     });
