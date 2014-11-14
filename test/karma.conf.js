@@ -43,8 +43,7 @@ module.exports = function(config) {
     //Add automatic angular filesorting before running the tests
     angularFilesort: {
       whitelist: [
-        'src/app/**/*.js',
-        'src/components/**/*.js'
+        'src/*.js',
       ]
     },
 

@@ -3,7 +3,7 @@
 //Dependencies
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')({
-      pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'lazypipe', 'minimist']
+      pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'lazypipe', 'minimist', 'del']
     });
 
 //Read CLI arguments & populate variables
@@ -38,7 +38,7 @@ gulp.task('scripts', false, function () {
 });
 
 gulp.task('clean', false, function () {
-  return gulp.src(['dist'], {read: false}).pipe($.rimraf());
+  return $.del(['dist']);
 });
 
 gulp.task('build', 'Build the application, accepts environment parameter', ['clean','scripts'], function() {

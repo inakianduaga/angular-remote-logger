@@ -5,7 +5,7 @@ angular.module('angular-remote-logger',[])
     function ($httpProvider) {
       $httpProvider.interceptors.push('httpInterceptor');
     }
-  )
+  );
 
 
 
