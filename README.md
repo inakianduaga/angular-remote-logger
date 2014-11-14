@@ -1,16 +1,16 @@
-angular-remote-logger
+angular-remote-logger   [![Build Status](https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master)](https://travis-ci.org/inakianduaga/angular-remote-logger)
 =====================
 
 Angular Exception/XHR ($log todo) remote logger
 
 # Installation
 
-### Bower
+#### Bower
 
 - Add `angular-remote-logger` as a bower dependency (with the desired version). 
 - Reference `angular-remote-logger.min.js` file (or better use a bower script injector `main-bower-files` using grunt/gulp)  
  
-### Manually
+#### Manually
  
 Copy the file angular `dist/angular-remote-logger.min.js` into your project 
 
@@ -31,7 +31,7 @@ This will:
 
 Log all application exceptions remotely, with a configurable throttle interval. 
 
-### Configuration
+#### Configuration
 
 The parameters can be modified by changing the values of the constant `EXCEPTION_LOGGER_CONFIG`, as follows
 
@@ -50,7 +50,7 @@ angular.module('angular-remote-logger')
 
 Log non-200 xhr responses remotely
 
-### Configuration
+#### Configuration
 
 The parameters can be modified by changing the values of the constant `XHR_LOGGER_CONFIG`, as follows
 
@@ -62,3 +62,15 @@ angular.module('angular-remote-logger')
     }
   );
 ```
+
+# Contributing
+
+#### Setup Environment
+1. Install `node.js`, `npm` for package management
+1. Install `bower` globally.
+1. Run `npm install`, `bower install` to install the build/app dependencies
+
+#### Tasks
+ 
+- Run `gulp` from the root installation folder to retrieve a list of the available tasks 
+   
