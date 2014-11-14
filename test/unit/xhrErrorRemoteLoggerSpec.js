@@ -6,7 +6,7 @@ describe('Http Interceptor:', function () {
       $rootScope,
       $http,
       $httpBackend,
-      httpInterceptorPostUrl;
+      REMOTE_LOG_URL;
 
   //== Mocks ==//
 
@@ -27,7 +27,7 @@ describe('Http Interceptor:', function () {
 
       //Mock configuration
       angularRemoteLoggerConfigurator.xhrLogger.replace(configuration.XHR_LOGGER_CONFIG);
-      httpInterceptorPostUrl = _XHR_LOGGER_CONFIG_.remoteLogUrl;
+      REMOTE_LOG_URL = _XHR_LOGGER_CONFIG_.remoteLogUrl;
 
     });
 
@@ -55,7 +55,7 @@ describe('Http Interceptor:', function () {
       var url = 'foo';
 
       $httpBackend.expectGET(url).respond(404, '');
-      $httpBackend.expectPOST(httpInterceptorPostUrl).respond(200, '');
+      $httpBackend.expectPOST(REMOTE_LOG_URL).respond(200, '');
 
       $http.get(url);
 
@@ -70,7 +70,7 @@ describe('Http Interceptor:', function () {
       var url = 'foo';
 
       $httpBackend.expectGET(url).respond(404, '');
-      $httpBackend.expectPOST(httpInterceptorPostUrl).respond(500, '');
+      $httpBackend.expectPOST(REMOTE_LOG_URL).respond(500, '');
 
       $http.get(url);
 
@@ -82,9 +82,9 @@ describe('Http Interceptor:', function () {
 
     it('shouldn`t try to log error when the original error url is the log error (prevents infinity loop)', function () {
 
-      $httpBackend.expectGET(httpInterceptorPostUrl).respond(404, '');
+      $httpBackend.expectGET(REMOTE_LOG_URL).respond(404, '');
 
-      $http.get(httpInterceptorPostUrl);
+      $http.get(REMOTE_LOG_URL);
 
       $httpBackend.flush();
 

@@ -66,6 +66,7 @@ describe('Exception Remote Logger:', function () {
 
       //Mock configuration
       angularRemoteLoggerConfigurator.exceptionLogger.replace(configuration.EXCEPTION_LOGGER_CONFIG);
+      angularRemoteLoggerConfigurator.xhrLogger.replace(configuration.XHR_LOGGER_CONFIG);
       REMOTE_LOG_URL = _EXCEPTION_LOGGER_CONFIG_.remoteLogUrl;
       EXCEPTION_LOGGER_CONFIG = _EXCEPTION_LOGGER_CONFIG_;
 

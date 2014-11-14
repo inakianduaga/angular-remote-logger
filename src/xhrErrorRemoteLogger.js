@@ -1,16 +1,13 @@
+'use strict';
+
 /**
- * Http interceptor
- *  - logs all request errors remotely
+ * Http interceptor - logs all request errors remotely
  */
 angular
   .module('angular-remote-logger')
   .factory('httpInterceptor',
     ['$q', '$injector','$rootScope', 'XHR_LOGGER_CONFIG',
     function($q, $injector,  $rootScope, XHR_LOGGER_CONFIG){
-
-      'use strict';
-
-      var remoteLogUrl = XHR_LOGGER_CONFIG.remoteLogUrl;
 
       /**
        * Logs a request error into the server
@@ -19,21 +16,22 @@ angular
        */
       function remotelyLogXHRException(rejection) {
 
-          var config = {
-            method: 'post',
-            url: remoteLogUrl,
-            data : rejection
-          };
+        var config = {
+          method: 'post',
+          url: XHR_LOGGER_CONFIG.remoteLogUrl,
+          data : rejection
+        };
 
-          //If the rejection comes from trying to log the error itself, don't retry otherwise we end up in infinity loop trying to log
-          if(rejection.config.url === remoteLogUrl) {
-            return;
-          }
+        //If the rejection comes from trying to log the error itself, don't retry otherwise we end up in infinity loop trying to log
+        if(rejection.config.url === XHR_LOGGER_CONFIG.remoteLogUrl) {
+          return;
+        }
 
-          //Inject http service and post exception
-          $injector.get('$http')(config).catch(function(){
-            console.log('The http interceptor logging has failed!');
-          });
+        //Inject http service and post exception
+        $injector.get('$http')(config).catch(function(){
+          console.log('The http interceptor logging has failed!');
+        });
+
       }
 
       //Pass object to the angular httpProvider with the different case configurations
