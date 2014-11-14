@@ -1,7 +1,18 @@
 angular-remote-logger
 =====================
 
-Angular Exception/XHR/log (coming soon) remote logger
+Angular Exception/XHR ($log todo) remote logger
+
+# Installation
+
+### Bower
+
+- Add `angular-remote-logger` as a bower dependency (with the desired version). 
+- Reference `angular-remote-logger.min.js` file (or better use a bower script injector `main-bower-files` using grunt/gulp)  
+ 
+### Manually
+ 
+Copy the file angular `dist/angular-remote-logger.min.js` into your project 
 
 # Usage
 
