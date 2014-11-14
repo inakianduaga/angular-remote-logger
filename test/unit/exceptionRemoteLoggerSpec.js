@@ -6,7 +6,8 @@ describe('Exception Remote Logger:', function () {
       $httpBackend,
       $exceptionHandler,
       REMOTE_LOG_URL,
-      EXCEPTION_LOGGER_CONFIG;
+      EXCEPTION_LOGGER_CONFIG,
+      XHR_LOGGER_CONFIG;
 
 
   //== Mocks ==//
@@ -58,17 +59,16 @@ describe('Exception Remote Logger:', function () {
     module('angular-remote-logger');
 
     //Access request service and dependencies
-    inject(function (_$httpBackend_, _$rootScope_, _$exceptionHandler_, _EXCEPTION_LOGGER_CONFIG_, angularRemoteLoggerConfigurator) {
+    inject(function (_$httpBackend_, _$rootScope_, _$exceptionHandler_, _EXCEPTION_LOGGER_CONFIG_, _XHR_LOGGER_CONFIG_) {
 
       $rootScope = _$rootScope_;
       $httpBackend = _$httpBackend_;
       $exceptionHandler = _$exceptionHandler_;
 
       //Mock configuration
-      angularRemoteLoggerConfigurator.exceptionLogger.replace(configuration.EXCEPTION_LOGGER_CONFIG);
-      angularRemoteLoggerConfigurator.xhrLogger.replace(configuration.XHR_LOGGER_CONFIG);
       REMOTE_LOG_URL = _EXCEPTION_LOGGER_CONFIG_.remoteLogUrl;
       EXCEPTION_LOGGER_CONFIG = _EXCEPTION_LOGGER_CONFIG_;
+      XHR_LOGGER_CONFIG = _XHR_LOGGER_CONFIG_;
 
     });
 
@@ -133,7 +133,10 @@ describe('Exception Remote Logger:', function () {
 
   });
 
-  it('should warn through console when error logging post failed', function () {
+  it('should warn through console when error logging post failed when exception/xhr remote url endpoints match', function () {
+
+    //Make XHR remote endpoint match Exception remote endpoint
+    XHR_LOGGER_CONFIG.remoteLogUrl = REMOTE_LOG_URL;
 
     $httpBackend.expectPOST(REMOTE_LOG_URL).respond(404, '');
 

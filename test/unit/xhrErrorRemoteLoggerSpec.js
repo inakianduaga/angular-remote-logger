@@ -18,7 +18,7 @@ describe('Http Interceptor:', function () {
     module('angular-remote-logger');
 
     //Access request service and dependencies
-    inject(function (_httpInterceptor_, _$http_, _$httpBackend_, _$rootScope_, _XHR_LOGGER_CONFIG_, angularRemoteLoggerConfigurator) {
+    inject(function (_httpInterceptor_, _$http_, _$httpBackend_, _$rootScope_, _XHR_LOGGER_CONFIG_) {
 
       httpInterceptor = _httpInterceptor_;
       $http = _$http_;
@@ -26,7 +26,6 @@ describe('Http Interceptor:', function () {
       $rootScope = _$rootScope_;
 
       //Mock configuration
-      angularRemoteLoggerConfigurator.xhrLogger.replace(configuration.XHR_LOGGER_CONFIG);
       REMOTE_LOG_URL = _XHR_LOGGER_CONFIG_.remoteLogUrl;
 
     });
