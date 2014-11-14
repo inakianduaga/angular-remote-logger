@@ -1,4 +1,4 @@
-angular-remote-logger   [![Build Status](https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master)](https://travis-ci.org/inakianduaga/angular-remote-logger)
+angular-remote-logger   [![Build Status](https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master)](https://travis-ci.org/inakianduaga/angular-remote-logger) [![Coverage Status](https://img.shields.io/coveralls/inakianduaga/angular-remote-logger.svg?style=flat)](https://coveralls.io/r/inakianduaga/angular-remote-logger?branch=master)
 =====================
 
 Angular Exception/XHR ($log todo) remote logger

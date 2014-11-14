@@ -8,15 +8,16 @@ var $ = require('gulp-load-plugins')({
 
 //Read CLI arguments & populate variables
 var ARGV = $.minimist(process.argv),
+  ENVIRONMENT = ARGV.environment || 'development',
   GENERATE_COVERAGE_REPORT = ARGV['generate-coverage-report'] && ARGV['generate-coverage-report'] !== 'false' && ARGV['generate-coverage-report'] !== '0',
   COVERAGE_FORMAT = ARGV['coverage-format'] ? ARGV['coverage-format'] : 'html';
-
 
 /**
  * Cli options for the tests
  */
 var cliTestOptions = {
   options : {
+    'environment [development]' : 'The environment under which the tests are running [development|ci]. Use ci for continuous integration builds',
     'generate-coverage-report [false]' : 'Whether to generate code coverage report along with the tests [boolean]',
     'coverage-format [html]' : 'Code-coverage report format [html|lcov|lcovonly|text|text-summary|cobertura]'
   }
@@ -44,20 +45,32 @@ function buildTestFilelist() {
 }
 
 /**
+ * Whether the current environment is a continuous integration
+ * @returns {boolean}
+ */
+function isEnvironmentContinuousIntegration() {
+  return ENVIRONMENT === 'ci';
+}
+
+/**
  * Trigger notification indicating test results
  *
  * @param exitCode
  */
 function notifyTestDone(exitCode) {
 
-  var success = (exitCode === 0);
-  var notification = {
-    title : success ? 'Unit test completed' : 'Unit test failed!!!',
-    message : success ? 'Success' : 'Errors ocurred',
-    icon : success ? __dirname + '/icons/pass.png' : __dirname + '/icons/fail.png'
-  };
+  var success = (exitCode === 0),
+      notification = {
+        title : success ? 'Unit test completed' : 'Unit test failed!!!',
+        message : success ? 'Success' : 'Errors ocurred',
+        icon : success ? __dirname + '/icons/pass.png' : __dirname + '/icons/fail.png'
+      };
 
-  gulp.src('src').pipe($.notify(notification));
+  if(!isEnvironmentContinuousIntegration()) {
+    gulp.src('src').pipe($.notify(notification));
+  } else {
+    return exitCode;
+  }
 
 }
 
@@ -86,8 +99,7 @@ function buildKarmaConfig(overrideOptions)
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'src/app/**/*.js': ['coverage'],
-      'src/components/**/*.js': ['coverage']
+      'src/*.js': ['coverage']
     };
 
     options.reporters.push('coverage');
@@ -112,7 +124,7 @@ function buildKarmaConfig(overrideOptions)
  */
 function launchCodeCoverageViewerAfterGenerated()
 {
-  if(GENERATE_COVERAGE_REPORT && COVERAGE_FORMAT === 'html') {
+  if(GENERATE_COVERAGE_REPORT && COVERAGE_FORMAT === 'html' && !isEnvironmentContinuousIntegration()) {
     gulp.start('test-view-coverage-report');
   }
 }
