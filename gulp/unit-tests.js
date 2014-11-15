@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var karma = require('karma').server;
 var $ = require('gulp-load-plugins')({
-  pattern: ['wiredep', 'gulp-notify', 'gulp-angular-filesort', 'minimist', 'browser-sync']
+  pattern: ['wiredep', 'gulp-coveralls', 'gulp-notify', 'gulp-angular-filesort', 'minimist', 'browser-sync']
 });
 
 //Read CLI arguments & populate variables
@@ -89,7 +89,7 @@ function buildKarmaConfig(overrideOptions)
     configFile: __dirname + '/../test/karma.conf.js',
     files : buildTestFilelist(),
     singleRun: true,
-    reporters : ['progress'],
+    reporters : ['progress']
   };
 
   //Code coverage configuration
@@ -158,6 +158,22 @@ gulp.task('test-view-coverage-report', null, function() {
     }
   });
 });
+
+
+// Submit generated code coverage information to coveralls
+gulp.task('coveralls', 'Submit generated code coverage information to coveralls', function() {
+
+  GENERATE_COVERAGE_REPORT = true;
+  COVERAGE_FORMAT = 'lcov';
+
+  return karma.start(buildKarmaConfig(), function(exitCode) {
+
+    gulp.src('coverage/**/lcov.info')
+      .pipe($.coveralls());
+  });
+
+});
+
 
 
 //Task to fix the karma-runner jasmine version
