@@ -77,8 +77,8 @@ angular.module('angular-remote-logger')
 [travis-url]: https://travis-ci.org/inakianduaga/angular-remote-logger
 [travis-image]: https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master
 
-[coveralls-url]: https://coveralls.io/r/inakianduaga/angular-remote-logger?branch=master
-[coveralls-image]: https://img.shields.io/coveralls/inakianduaga/angular-remote-logger.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/inakianduaga/angular-remote-logger
+[coveralls-image]: https://coveralls.io/repos/inakianduaga/angular-remote-logger/badge.png
 
 [code-climate-url]: https://codeclimate.com/github/inakianduaga/angular-remote-logger
 [code-climate-image]: https://codeclimate.com/github/inakianduaga/angular-remote-logger/badges/gpa.svg
