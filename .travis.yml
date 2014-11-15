@@ -5,5 +5,5 @@ before_script: #http://badsyntax.co/post/travis-ci-and-bower (these run after np
   - npm install -g bower
   - bower install
 after_success:
-  - coveralls
+  - gulp coveralls
 

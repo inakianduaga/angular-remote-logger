@@ -1,4 +1,4 @@
-angular-remote-logger   [![Build Status](https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master)](https://travis-ci.org/inakianduaga/angular-remote-logger) [![Coverage Status](https://img.shields.io/coveralls/inakianduaga/angular-remote-logger.svg?style=flat)](https://coveralls.io/r/inakianduaga/angular-remote-logger?branch=master) [![Code Climate](https://codeclimate.com/github/inakianduaga/angular-remote-logger/badges/gpa.svg)](https://codeclimate.com/github/inakianduaga/angular-remote-logger)
+angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url]
 =====================
 
 Angular Exception/XHR ($log todo) remote logger
@@ -73,4 +73,15 @@ angular.module('angular-remote-logger')
 #### Tasks
  
 - Run `gulp` from the root installation folder to retrieve a list of the available tasks 
-   
+
+[travis-url]: https://travis-ci.org/inakianduaga/angular-remote-logger
+[travis-image]: https://travis-ci.org/inakianduaga/angular-remote-logger.svg?branch=master
+
+[coveralls-url]: https://coveralls.io/r/inakianduaga/angular-remote-logger?branch=master
+[coveralls-image]: https://img.shields.io/coveralls/inakianduaga/angular-remote-logger.svg?style=flat
+
+[code-climate-url]: https://codeclimate.com/github/inakianduaga/angular-remote-logger
+[code-climate-image]: https://codeclimate.com/github/inakianduaga/angular-remote-logger/badges/gpa.svg
+
+[depstat-url]: https://david-dm.org/inakianduaga/angular-remote-logger.png
+[depstat-image]: https://david-dm.org/inakianduaga/angular-remote-logger.png?theme=shields.io
