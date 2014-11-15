@@ -83,5 +83,5 @@ angular.module('angular-remote-logger')
 [code-climate-url]: https://codeclimate.com/github/inakianduaga/angular-remote-logger
 [code-climate-image]: https://codeclimate.com/github/inakianduaga/angular-remote-logger/badges/gpa.svg
 
-[depstat-url]: https://david-dm.org/inakianduaga/angular-remote-logger.png
+[depstat-url]: https://david-dm.org/inakianduaga/angular-remote-logger
 [depstat-image]: https://david-dm.org/inakianduaga/angular-remote-logger.png?theme=shields.io
