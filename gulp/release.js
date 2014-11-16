@@ -12,14 +12,19 @@ var ARGV = $.minimist(process.argv),
 
 
 gulp.task('checkoutMasterBranch', false, function() {
-  return gulp.src('./')
-    .pipe(git.checkout('master'))
+
+  $.git.checkout('master', function(err){
+    $.util.log(err);
+  });
+
 });
 
 gulp.task('bump', false, ['checkoutMasterBranch'], function() {
+
   return gulp.src(['./package.json', './bower.json'])
-    .pipe(bump({ type: VERSION_TYPE}))
+    .pipe($.bump({ type: VERSION_TYPE}))
     .pipe(gulp.dest('./'));
+
 });
 
 
@@ -30,9 +35,9 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
   var message = 'Release ' + v;
 
   return gulp.src('./')
-    .pipe(git.commit(message))
-    .pipe(git.tag(v, message))
-    .pipe(git.push('origin', 'master', '--tags'))
+    .pipe($.git.commit(message))
+    .pipe($.git.tag(v, message))
+    .pipe($.git.push('origin', 'master', '--tags'))
     .pipe(gulp.dest('./'));
 
 }, {
