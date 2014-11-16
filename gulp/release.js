@@ -28,17 +28,15 @@ gulp.task('bump', false, ['checkoutMasterBranch'], function() {
 });
 
 
-gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git', ['bump'], function () {
+gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git origin repo', ['bump'], function () {
 
   var pkg = require('../package.json');
   var v = 'v' + pkg.version;
   var message = 'Release ' + v;
 
-  return gulp.src('./')
-    .pipe($.git.commit(message))
-    .pipe($.git.tag(v, message))
-    .pipe($.git.push('origin', 'master', '--tags'))
-    .pipe(gulp.dest('./'));
+  $.git.commit(message);
+  $.git.tag(v, message);
+  $.git.push('origin', 'master', '--tags');
 
 }, {
   options: {
