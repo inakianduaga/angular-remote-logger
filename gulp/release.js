@@ -13,8 +13,14 @@ var ARGV = $.minimist(process.argv),
 
 gulp.task('checkoutMasterBranch', false, function() {
 
-  $.git.checkout('master', function(err){
-    $.util.log(err);
+  $.git.revParse({args:'--abbrev-ref HEAD'}, function(err, currentBranch) {
+
+    if(currentBranch !== 'master') {
+      $.git.checkout('master', function(err){
+        $.util.log(err);
+      });
+    }
+
   });
 
 });
@@ -34,11 +40,16 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
   var v = 'v' + pkg.version;
   var message = 'Release ' + v;
 
-  $.git.commit(message);
+  gulp.src('./*')
+    .pipe($.git.add())
+    .pipe($.git.commit(message));
+
   $.git.tag(v, message, function(err){
-    $.util.log(err);
+    if (err) throw err;
   });
-  $.git.push('origin', 'master', '--tags');
+  $.git.push('origin', 'master', '--tags', function(err){
+    if (err) throw err;
+  });
 
 }, {
   options: {
