@@ -1,4 +1,4 @@
-angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url]
+angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url]
 =====================
 
 Angular Exception/XHR ($log todo) remote logger
@@ -83,5 +83,8 @@ angular.module('angular-remote-logger')
 [code-climate-url]: https://codeclimate.com/github/inakianduaga/angular-remote-logger
 [code-climate-image]: https://codeclimate.com/github/inakianduaga/angular-remote-logger/badges/gpa.svg
 
-[depstat-url]: https://david-dm.org/inakianduaga/angular-remote-logger.png
+[depstat-url]: https://david-dm.org/inakianduaga/angular-remote-logger
 [depstat-image]: https://david-dm.org/inakianduaga/angular-remote-logger.png?theme=shields.io
+
+[depstat-dev-url]: https://david-dm.org/inakianduaga/angular-remote-logger#info=devDependencies&view=table
+[depstat-dev-image]: https://david-dm.org/inakianduaga/angular-remote-logger/dev-status.svg?theme=shields.io
