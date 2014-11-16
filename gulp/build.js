@@ -4,7 +4,8 @@
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')({
       pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'lazypipe', 'minimist', 'del']
-    });
+    }),
+    pkg = require('../package.json');
 
 //Read CLI arguments & populate variables
 var ARGV = $.minimist(process.argv),
@@ -17,7 +18,7 @@ var ARGV = $.minimist(process.argv),
 
 gulp.task('scripts', false, function () {
 
-  var buildFilename = IS_PRODUCTION ? 'angular-remote-logger.min.js' : 'angular-remote-logger.js';
+  var buildFilename = IS_PRODUCTION ? pkg.name + '.min.js' : pkg.name + '.js';
 
   var lintJs = $.lazypipe()
     .pipe(function() { return $.jshint(); })

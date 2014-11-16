@@ -1,4 +1,4 @@
-angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url]
+angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
 =====================
 
 Angular Exception/XHR ($log todo) remote logger
@@ -94,3 +94,6 @@ angular.module('angular-remote-logger')
 
 [depstat-dev-url]: https://david-dm.org/inakianduaga/angular-remote-logger#info=devDependencies&view=table
 [depstat-dev-image]: https://david-dm.org/inakianduaga/angular-remote-logger/dev-status.svg?theme=shields.io
+
+[bower-url]: http://badge.fury.io/bo/angular-remote-logger
+[bower-image]: https://badge.fury.io/bo/angular-remote-logger.svg
