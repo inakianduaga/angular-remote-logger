@@ -35,7 +35,9 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
   var message = 'Release ' + v;
 
   $.git.commit(message);
-  $.git.tag(v, message);
+  $.git.tag(v, message, function(err){
+    $.util.log(err);
+  });
   $.git.push('origin', 'master', '--tags');
 
 }, {
