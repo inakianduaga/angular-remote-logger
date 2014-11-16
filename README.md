@@ -27,6 +27,8 @@ This will:
 - register an `httpInterceptor` to log all failed xhr requests
 - register a decorator for the `$exceptionHandler` provider to log all app exceptions.
 
+---
+
 # Exception logger
 
 Log all application exceptions remotely, with a configurable throttle interval. 
@@ -45,7 +47,9 @@ angular.module('angular-remote-logger')
     }
   );
 ```
-  
+
+---
+
 # Http Xhr error logging
 
 Log non-200 xhr responses remotely
@@ -62,6 +66,8 @@ angular.module('angular-remote-logger')
     }
   );
 ```
+
+---
 
 # Contributing
 
