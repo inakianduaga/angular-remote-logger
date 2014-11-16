@@ -179,7 +179,7 @@ gulp.task('coveralls', 'Submit generated code coverage information to coveralls'
 //Task to fix the karma-runner jasmine version
 //We need this because we can't get working v0.3.0 of karma-jasmine, which has the newer version.
 //Once that's fixed, we don't need this
-gulp.task('fixKarmaRunnerJasmineVersion', null, function() {
+gulp.task('fixKarmaRunnerJasmineVersion', false, function() {
 
   var del = require('del');
   var oldVersion = 'node_modules/karma-jasmine/lib/jasmine.js';
