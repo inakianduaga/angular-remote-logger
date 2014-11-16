@@ -16,7 +16,7 @@ var ARGV = $.minimist(process.argv),
 
 // Tasks //
 
-gulp.task('scripts', false, function () {
+gulp.task('scripts', false, ['clean'], function () {
 
   var buildFilename = IS_PRODUCTION ? pkg.name + '.min.js' : pkg.name + '.js';
 
@@ -42,7 +42,7 @@ gulp.task('clean', false, function () {
   return $.del(['dist']);
 });
 
-gulp.task('build', 'Build the application, accepts environment parameter', ['clean','scripts'], function() {
+gulp.task('build', 'Build the application, accepts environment parameter', ['scripts'], function() {
 
   //Notified of build
   gulp.src('src') //Dummy stream so we can trigger notification

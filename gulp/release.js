@@ -5,15 +5,24 @@ var gulp = require('gulp'),
   $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'minimist']
   });
+  $.fs = require('fs');
 
 //Read CLI arguments & populate variables
 var ARGV = $.minimist(process.argv),
   VERSION_TYPE = ARGV.version || 'minor';
 
+/**
+ * Reads the package.json file
+ * `fs` is used instead of require to prevent caching in watch (require caches)
+ * @returns {json}
+ */
+function getPackageJson() {
+  return JSON.parse($.fs.readFileSync('./package.json', 'utf-8'));
+}
 
 gulp.task('checkoutMasterBranch', false, function() {
 
-  $.git.revParse({args:'--abbrev-ref HEAD'}, function(err, currentBranch) {
+  return $.git.revParse({args:'--abbrev-ref HEAD'}, function(err, currentBranch) {
 
     if(currentBranch !== 'master') {
       $.git.checkout('master', function(err){
@@ -33,12 +42,14 @@ gulp.task('bump', false, ['checkoutMasterBranch'], function() {
 
 });
 
-
 gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git origin repo', ['bump'], function () {
 
-  var pkg = require('../package.json');
+  var pkg = getPackageJson();
   var v = 'v' + pkg.version;
   var message = 'Release ' + v;
+
+  console.log(v);
+  console.log(message);
 
   gulp.src('./*')
     .pipe($.git.add())
