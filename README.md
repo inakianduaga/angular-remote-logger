@@ -4,7 +4,7 @@ angular-remote-logger
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
 
 
-> Angular Exception/XHR ($log todo) remote logger
+Angular Exception/XHR remote logger ($log todo)
 
 # Installation
 
@@ -34,7 +34,7 @@ This will:
 
 # Exception logger
 
-> Log all application exceptions remotely, with a configurable throttle interval. 
+Log all application exceptions remotely, with a configurable throttle interval. 
 
 #### Configuration
 
@@ -55,7 +55,7 @@ angular.module('angular-remote-logger')
 
 # Http Xhr error logger
 
-> Log all non-200 xhr responses remotely
+Log all non-200 xhr responses remotely
 
 #### Configuration
 
