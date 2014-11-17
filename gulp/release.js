@@ -43,15 +43,24 @@ gulp.task('bump', false, ['checkoutMasterBranch'], function() {
 
 });
 
-gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git origin repo', ['bump'], function () {
+gulp.task('commit', false, ['bump'], function() {
 
   var pkg = getPackageJson();
   var v = 'v' + pkg.version;
   var message = 'Release ' + v;
 
-  gulp.src('./*')
+  return gulp.src('./')
     .pipe($.git.add())
     .pipe($.git.commit(message));
+
+});
+
+
+gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git origin repo', ['commit'], function () {
+
+  var pkg = getPackageJson();
+  var v = 'v' + pkg.version;
+  var message = 'Release ' + v;
 
   $.git.tag(v, message, function(err){
     if (err) throw err;
