@@ -161,7 +161,7 @@ gulp.task('test-view-coverage-report', null, function() {
 
 
 // Submit generated code coverage information to coveralls
-gulp.task('coveralls', 'Submit generated code coverage information to coveralls', function() {
+gulp.task('coveralls', 'Submit generated code coverage information to coveralls (works only under travis ci environment)', function() {
 
   GENERATE_COVERAGE_REPORT = true;
   COVERAGE_FORMAT = 'lcov';
