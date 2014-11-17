@@ -4,22 +4,22 @@ angular-remote-logger
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
 
 
-Angular Exception/XHR remote logger ($log todo)
+Angular Exception/failed XHR remote logger ($log todo)
 
 # Installation
 
-#### Bower
+## Bower
 
 - Add `angular-remote-logger` as a bower dependency (with the desired version). 
-- Reference `angular-remote-logger.min.js` file (or better use a bower script injector `main-bower-files` using grunt/gulp)  
+- Reference `angular-remote-logger.min.js` file (or better yet, use a bower script injector such as `main-bower-files` for grunt/gulp to automatically add the dependency)  
  
-#### Manually
+## Manually
  
-Copy the file angular `dist/angular-remote-logger.min.js` into your project 
+Copy the file angular `dist/angular-remote-logger.min.js` into your project and reference it in your app.
 
 # Usage
 
-Add module `angular-remote-logger` as a dependency to your app. For example:
+Add the angular module `angular-remote-logger` as a dependency to your app. For example:
 
 ```js
 angular.module('myApp', ['angular-remote-logger', ...]);
@@ -36,7 +36,7 @@ This will:
 
 Log all application exceptions remotely, with a configurable throttle interval. 
 
-#### Configuration
+## Configuration
 
 The parameters can be modified by changing the values of the constant `EXCEPTION_LOGGER_CONFIG`, as follows
 
@@ -57,7 +57,7 @@ angular.module('angular-remote-logger')
 
 Log all non-200 xhr responses remotely
 
-#### Configuration
+## Configuration
 
 The parameters can be modified by changing the values of the constant `XHR_LOGGER_CONFIG`, as follows
 
@@ -74,12 +74,12 @@ angular.module('angular-remote-logger')
 
 # Contributing
 
-#### Setup Environment
+## Setup Environment
 1. Install `node.js`, `npm` for package management
 1. Install `bower` globally.
 1. Run `npm install`, `bower install` to install the build/app dependencies
 
-#### Tasks
+## Tasks
  
 - Run `gulp` from the root installation folder to retrieve a list of the available tasks 
 
