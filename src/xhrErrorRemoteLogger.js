@@ -39,11 +39,10 @@ angular
 
         responseError: function (rejection) {
 
-          //Log exception remotely
-          remotelyLogXHRException(rejection);
-
-          //Broadcast error to rootScope
-          $rootScope.$broadcast('xhrRequest.error', rejection);
+          if(XHR_LOGGER_CONFIG.enabled) {
+            remotelyLogXHRException(rejection);
+            $rootScope.$broadcast('xhrRequest.error', rejection);
+          }
 
           //Chain forward the rejection
           return $q.reject(rejection);

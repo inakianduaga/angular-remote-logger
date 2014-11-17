@@ -64,13 +64,16 @@ angular
         //Pass decorator to the $exceptionHandler provider
         return function (exception, cause) {
 
-          //Broadcast error to rootScope
-          $injector.get('$rootScope').$broadcast('exception', exception);
+          if(EXCEPTION_LOGGER_CONFIG.enabled) {
 
-          if(!shouldThrottle()) {
-            remotelyLogException(exception, cause);
-          } else {
-            console.log('Too many exceptions in the last '+ EXCEPTION_LOGGER_CONFIG.windowInSeconds +' seconds, skipping remote logging');
+            $injector.get('$rootScope').$broadcast('exception', exception);
+
+            if(!shouldThrottle()) {
+              remotelyLogException(exception, cause);
+            } else {
+              console.log('Too many exceptions in the last '+ EXCEPTION_LOGGER_CONFIG.windowInSeconds +' seconds, skipping remote logging');
+            }
+
           }
 
           //Chain along
