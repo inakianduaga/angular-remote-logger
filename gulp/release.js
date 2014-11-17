@@ -6,10 +6,11 @@ var gulp = require('gulp'),
     pattern: ['gulp-*', 'minimist']
   });
   $.fs = require('fs');
+  $.environment = require('./lib/environment.js');
 
-//Read CLI arguments & populate variables
-var ARGV = $.minimist(process.argv),
-  VERSION_TYPE = ARGV.version || 'minor';
+//CLI parameters
+var VERSION_TYPE = $.environment.get('version', 'minor');
+$.environment.set('environment', 'production'); //set environment to production
 
 /**
  * Reads the package.json file
@@ -20,7 +21,7 @@ function getPackageJson() {
   return JSON.parse($.fs.readFileSync('./package.json', 'utf-8'));
 }
 
-gulp.task('checkoutMasterBranch', false, function() {
+gulp.task('checkoutMasterBranch', false, ['build'], function() {
 
   return $.git.revParse({args:'--abbrev-ref HEAD'}, function(err, currentBranch) {
 
@@ -47,9 +48,6 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
   var pkg = getPackageJson();
   var v = 'v' + pkg.version;
   var message = 'Release ' + v;
-
-  console.log(v);
-  console.log(message);
 
   gulp.src('./*')
     .pipe($.git.add())
