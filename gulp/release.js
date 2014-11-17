@@ -7,7 +7,8 @@ var gulp = require('gulp'),
   });
   $.fs = require('fs');
   $.environment = require('./lib/environment.js');
-  $.changelog = require('conventional-changelog');
+  $.changelog = require('changelog');
+  $.q = require('q');
 
 //CLI parameters
 var VERSION_TYPE = $.environment.get('version', 'minor');
@@ -44,7 +45,7 @@ gulp.task('bump', false, ['checkoutMasterBranch'], function() {
 
 });
 
-gulp.task('commit', false, ['bump'], function() {
+gulp.task('commit', false, ['bump', 'changelog'], function() {
 
   var pkg = getPackageJson();
   var v = 'v' + pkg.version;
@@ -76,14 +77,33 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
 });
 
 
-gulp.task('changelog', 'Generates a changelog from the last tagged release until now', function() {
-  var pkg = getPackageJson();
+gulp.task('changelog', 'Generates a daily changelog from github issues', function() {
 
-  $.changelog({
-    repository: 'https://github.com/inakianduaga/angular-remote-logger',
-    version: pkg.version,
-    file : 'CHANGELOG.md'
-  }, function(err, log) {
-    console.log('Here is your changelog!', log);
-  });
+  var changelogFilename = './CHANGELOG.md',
+      repo = 'github.com/inakianduaga/angular-remote-logger',
+      range = $.environment.get('range', 'all'),
+      deferred = $.q.defer();
+
+  $.util.log('Generating changelog...');
+
+  $.changelog.generate(repo, range)
+    .then(function(data) {
+
+      var markdown = $.changelog.markdown(data);
+
+      $.fs.writeFile(changelogFilename, markdown, function(err) {
+        if(err) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve();
+        }
+      });
+    });
+
+  return deferred.promise;
+
+}, {
+  options: {
+    'days [all]': 'The days included in the changelog [latest|all|number].'
+  }
 });
