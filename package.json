@@ -1,7 +1,7 @@
 {
   "name": "angular-remote-logger",
   "description": "Remote error logging for angular xhr/exceptions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/inakianduaga/angular-remote-logger",
   "private": true,
   "author": {
