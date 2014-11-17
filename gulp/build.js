@@ -6,19 +6,13 @@ var gulp = require('gulp'),
       pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'lazypipe', 'minimist', 'del']
     }),
     pkg = require('../package.json');
-
-//Read CLI arguments & populate variables
-var ARGV = $.minimist(process.argv),
-    ENVIRONMENT = ARGV.environment || 'development',
-    DATE = new Date().toISOString(),
-    IS_PRODUCTION = (ENVIRONMENT === 'production');
-
+    $.environment = require('./lib/environment.js');
 
 // Tasks //
 
-gulp.task('scripts', false, function () {
+gulp.task('scripts', false, ['clean'], function () {
 
-  var buildFilename = IS_PRODUCTION ? pkg.name + '.min.js' : pkg.name + '.js';
+  var buildFilename = $.environment.isProduction() ? pkg.name + '.min.js' : pkg.name + '.js';
 
   var lintJs = $.lazypipe()
     .pipe(function() { return $.jshint(); })
@@ -31,7 +25,7 @@ gulp.task('scripts', false, function () {
   return gulp.src('src/*.js')
     .pipe($.angularFilesort())
     .pipe(lintJs())
-    .pipe($.if(IS_PRODUCTION, minifyJs()))
+    .pipe($.if($.environment.isProduction(), minifyJs()))
     .pipe($.concat(buildFilename))
     .pipe(gulp.dest('dist'))
     .pipe($.size());
@@ -42,7 +36,7 @@ gulp.task('clean', false, function () {
   return $.del(['dist']);
 });
 
-gulp.task('build', 'Build the application, accepts environment parameter', ['clean','scripts'], function() {
+gulp.task('build', 'Build the application, accepts environment parameter', ['scripts'], function() {
 
   //Notified of build
   gulp.src('src') //Dummy stream so we can trigger notification
@@ -55,6 +49,6 @@ gulp.task('build', 'Build the application, accepts environment parameter', ['cle
 
 }, {
   options : {
-    'environment [development]' : 'Environment under which we build the application [development|production]'
+    'environment [development]' : 'Environment under which we build the application [development|production|ci]. CI is like production but adapted to continuous integration environment.'
   }
 });
