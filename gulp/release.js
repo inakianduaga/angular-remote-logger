@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   });
   $.fs = require('fs');
   $.environment = require('./lib/environment.js');
+  $.changelog = require('conventional-changelog');
 
 //CLI parameters
 var VERSION_TYPE = $.environment.get('version', 'minor');
@@ -55,7 +56,6 @@ gulp.task('commit', false, ['bump'], function() {
 
 });
 
-
 gulp.task('release', 'Bumps version, tags release using new version and pushes changes to git origin repo', ['commit'], function () {
 
   var pkg = getPackageJson();
@@ -73,4 +73,17 @@ gulp.task('release', 'Bumps version, tags release using new version and pushes c
   options: {
     'version [minor]': 'The semantic version type for this release [patch|minor|major]. See http://semver.org/ for information.'
   }
+});
+
+
+gulp.task('changelog', 'Generates a changelog from the last tagged release until now', function() {
+  var pkg = getPackageJson();
+
+  $.changelog({
+    repository: 'https://github.com/inakianduaga/angular-remote-logger',
+    version: pkg.version,
+    file : 'CHANGELOG.md'
+  }, function(err, log) {
+    console.log('Here is your changelog!', log);
+  });
 });
