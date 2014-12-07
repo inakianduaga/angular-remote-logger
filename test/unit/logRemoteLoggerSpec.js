@@ -17,7 +17,7 @@ describe('Remote Logger:', function () {
         'warn',
         'info',
         'error',
-        'debug',
+        'debug'
       ],
       message = 'foo';
 
@@ -32,7 +32,7 @@ describe('Remote Logger:', function () {
       message: message,
       logType: logType
     }
-  };
+  }
 
   //== Setup Tests ==//
 
@@ -124,7 +124,7 @@ describe('Remote Logger:', function () {
     try {
       $httpBackend.flush();
       expect(true).toBeFalsy();
-    } catch (err) {};
+    } catch (err) {}
 
   });
 
