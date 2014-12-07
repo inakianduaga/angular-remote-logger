@@ -6,6 +6,7 @@ describe('Http Interceptor:', function () {
       $rootScope,
       $http,
       $httpBackend,
+      XHR_LOGGER_CONFIG,
       REMOTE_LOG_URL;
 
   //== Mocks ==//
@@ -25,8 +26,8 @@ describe('Http Interceptor:', function () {
       $httpBackend = _$httpBackend_;
       $rootScope = _$rootScope_;
 
-      //Mock configuration
       REMOTE_LOG_URL = _XHR_LOGGER_CONFIG_.remoteLogUrl;
+      XHR_LOGGER_CONFIG = _XHR_LOGGER_CONFIG_;
 
     });
 
@@ -86,6 +87,27 @@ describe('Http Interceptor:', function () {
       $http.get(REMOTE_LOG_URL);
 
       $httpBackend.flush();
+
+    });
+
+    it('shouln`t log when xhr-logger is disabled', function() {
+
+      XHR_LOGGER_CONFIG.enabled = false;
+
+      var url = 'foo';
+
+      //Perform http fetch with 404 response
+      $httpBackend.expectGET(url).respond(404, '');
+      $http.get(url);
+      $httpBackend.flush();
+
+      //Flush the httpBackend:
+      // 1. if there are no outstanding request, this throws, in which case we make the test pass
+      // 2. if there are outstanding request, we force the test to fail since there shouldn't be any
+      try {
+        $httpBackend.flush();
+        expect(true).toBeFalsy();
+      } catch (err) {};
 
     });
 
