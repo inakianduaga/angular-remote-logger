@@ -47,6 +47,7 @@ angular.module('angular-remote-logger')
       EXCEPTION_LOGGER_CONFIG.windowInSeconds = 5; //defines the window interval for the throttle checking
       EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow = 4; //how many exceptions per window are logged before throttling
       EXCEPTION_LOGGER_CONFIG.remoteLogUrl = 'exception/Logger/Config/Remote/Url'; //remote log endpoint
+      EXCEPTION_LOGGER_CONFIG.enabled = false; //disables the exception logger
     }
   );
 ```
@@ -66,6 +67,7 @@ angular.module('angular-remote-logger')
   .config(
     function (XHR_LOGGER_CONFIG) {
       XHR_LOGGER_CONFIG.remoteLogUrl = 'xhr/Logger/Config/Remote/Url'; //remote log endpoint
+      XHR_LOGGER_CONFIG.enabled = false; //disables the xhr-logger
     }
   );
 ```
