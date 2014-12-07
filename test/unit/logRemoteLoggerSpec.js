@@ -5,7 +5,8 @@ describe('Remote Logger:', function () {
   var $log,
       $httpBackend,
       REMOTE_LOG_URL,
-      LOG_LOGGER_CONFIG;
+      LOG_LOGGER_CONFIG,
+      XHR_LOGGER_CONFIG;
 
   /**
    * List of different log operations
@@ -41,13 +42,14 @@ describe('Remote Logger:', function () {
     module('angular-remote-logger');
 
     //Access request service and dependencies
-    inject(function (_$log_, _$httpBackend_, _LOG_LOGGER_CONFIG_) {
+    inject(function (_$log_, _$httpBackend_, _LOG_LOGGER_CONFIG_, _XHR_LOGGER_CONFIG_) {
 
       $log = _$log_;
       $httpBackend = _$httpBackend_;
 
       REMOTE_LOG_URL = _LOG_LOGGER_CONFIG_.remoteLogUrl;
       LOG_LOGGER_CONFIG = _LOG_LOGGER_CONFIG_;
+      XHR_LOGGER_CONFIG = _XHR_LOGGER_CONFIG_;
 
     });
 
@@ -125,5 +127,22 @@ describe('Remote Logger:', function () {
     } catch (err) {};
 
   });
+
+  it('should log into console when the logger post call itself fails', function () {
+
+    spyOn(console, 'log');
+
+    XHR_LOGGER_CONFIG.enabled = false; //disable the XHR logger, we don't need to test that
+
+    $httpBackend.expectPOST(REMOTE_LOG_URL).respond(500, '');
+
+    $log.info(message);
+
+    $httpBackend.flush();
+
+    expect(console.log).toHaveBeenCalledWith('Failed to remotely post log!');
+
+  });
+
 
 });
