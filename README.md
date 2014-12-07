@@ -4,7 +4,7 @@ angular-remote-logger
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
 
 
-Angular Exception/failed XHR remote logger ($log todo)
+Angular Exception/failed XHR call/$log remote logger
 
 # Installation
 
@@ -73,6 +73,28 @@ angular.module('angular-remote-logger')
 ```
 
 ---
+
+# Log logger
+
+Log all $log call messages remotely
+
+#### Configuration
+
+The parameters can be modified by changing the values of the constant `LOG_LOGGER_CONFIG`, as follows
+
+```js
+angular.module('angular-remote-logger')
+  .config(
+    function (LOG_LOGGER_CONFIG) {
+      LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url'; //remote log endpoint
+      LOG_LOGGER_CONFIG.enabled = false; //disables the log-logger
+    }
+  );
+```
+
+---
+
+
 
 # Contributing
 

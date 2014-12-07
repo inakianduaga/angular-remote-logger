@@ -13,4 +13,9 @@ angular.module('angular-remote-logger')
   .constant('XHR_LOGGER_CONFIG', {
     remoteLogUrl : 'localhost',
     enabled: true
+  })
+  .constant('LOG_LOGGER_CONFIG', {
+    remoteLogUrl : 'localhost',
+    enabled: true
   });
+

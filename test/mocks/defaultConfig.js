@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Modifies standard module configuration
+ * Mocked standard module configuration
  */
 angular.module('angular-remote-logger')
   .config(
@@ -17,6 +17,13 @@ angular.module('angular-remote-logger')
       XHR_LOGGER_CONFIG.enabled = true;
       XHR_LOGGER_CONFIG.remoteLogUrl = 'xhr/Logger/Config/Remote/Url';
     }
-  );
+  )
+  .config(
+  function (LOG_LOGGER_CONFIG) {
+    LOG_LOGGER_CONFIG.enabled = true;
+    LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url';
+  }
+);
+
 
 
