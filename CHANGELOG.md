@@ -1,12 +1,35 @@
+2014-12-07
+==========
+
+  * Release v0.2.0
+  * Merge branch 'develop'
+  * Added test for failed log http post case
+  * Merge branch '15_log_remote_logger' into develop
+  * [#15](https://github.com/inakianduaga/angular-remote-logger/issues/15): Added remote $log logging + tests, updated README to reflect changes
+  * [#15](https://github.com/inakianduaga/angular-remote-logger/issues/15): Added log remote logger untested code, updated readme
+  * Updated Readme examples
+  * Merge branch '8_enabled_configuration_flag' into develop
+  * [#8](https://github.com/inakianduaga/angular-remote-logger/issues/8): Added configuration and tests to enable/disable individual loggers
+
+2014-11-18
+==========
+
+  * [#8](https://github.com/inakianduaga/angular-remote-logger/issues/8): Added enabled flag to configuration and loggers, missing tests
+  * More readme formatting changes
+  * More readme formatting
+  * Readme formatting
+  * Updated readme
+  * [#10](https://github.com/inakianduaga/angular-remote-logger/issues/10): Removed CHANGELOG from development
+
 2014-11-17
 ==========
 
+  * Merge branch 'master' into develop
   * Release v0.1.1
   * Release v0.1.0
   * Merge branch 'develop'
   * [#10](https://github.com/inakianduaga/angular-remote-logger/issues/10): Added Q library to use promises and handle sync task resolution
   * [#10](https://github.com/inakianduaga/angular-remote-logger/issues/10): Working on adding changelog generation to release tasks
-  * Merge branch 'master' into develop
   * Release v0.0.3
   * [#10](https://github.com/inakianduaga/angular-remote-logger/issues/10): Moved enviroment-related detection to separate module, added method to override environment dynamically
   * Added fs node module
