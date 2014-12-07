@@ -12,11 +12,6 @@ describe('Exception Remote Logger:', function () {
 
   //== Mocks ==//
 
-  //EXCEPTION_LOGGER_CONFIG = {
-  //  windowInSeconds : 10,
-  //  maxExceptionsPerWindow : 3
-  //};
-
   /**
    * Throws a wrapped jasmine exception
    * @param {integer} the number of exceptions we throw
@@ -93,7 +88,6 @@ describe('Exception Remote Logger:', function () {
 
     var overThreshold = 3;
 
-
     expectRemoteLog(EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow);
 
     mockedThrow(EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow + overThreshold);
@@ -145,6 +139,24 @@ describe('Exception Remote Logger:', function () {
     $httpBackend.flush();
 
     expect(console.log).toHaveBeenCalledWith('Failed to remotely log exception!');
+
+  });
+
+  it('shouln`t log exceptions when exception logger is disabled', function() {
+
+    EXCEPTION_LOGGER_CONFIG.enabled = false;
+
+    expectRemoteLog();
+
+    mockedThrow();
+
+    //Flush the httpBackend:
+    // 1. if there are no outstanding request, this should throw, in which case we make the test pass
+    // 2. if there are outstanding request, we force the test to fail since there shouldn't be any
+    try {
+      $httpBackend.flush();
+      expect(true).toBeFalsy();
+    } catch (err) {};
 
   });
 
