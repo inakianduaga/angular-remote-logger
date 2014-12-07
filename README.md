@@ -4,7 +4,7 @@ angular-remote-logger
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
 
 
-Angular Exception/failed XHR remote logger ($log todo)
+Angular Exception/failed XHR call/$log remote logger
 
 # Installation
 
@@ -52,6 +52,18 @@ angular.module('angular-remote-logger')
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the exception message & cause 
+ 
+```json
+data : {
+  exception : exception,
+  cause : cause
+}
+```
+
+
 ---
 
 # Http Xhr error logger
@@ -72,7 +84,56 @@ angular.module('angular-remote-logger')
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the entire xhr rejection json object 
+ 
+```json
+data: rejection
+```
+
+
 ---
+
+# Log logger
+
+Log all $log call messages remotely
+
+#### Configuration
+
+The parameters can be modified by changing the values of the constant `LOG_LOGGER_CONFIG`, as follows
+
+```js
+angular.module('angular-remote-logger')
+  .config(
+    function (LOG_LOGGER_CONFIG) {
+      LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url'; //remote log endpoint
+      LOG_LOGGER_CONFIG.enabled = {
+        global: true, //global flag to disable remote logging for all log operations 
+        warn : true, //toggle logging for individual log operations.
+        error : true,
+        info : true,
+        log : true,
+        debug : true
+      }
+    }
+  );
+```
+
+#### Remote Payload
+
+The remote logger will POST the log message, along with the log type: 
+ 
+```json
+data:   {
+  message: message,
+  logType: logType // info/log/debug/error/warn
+}
+```
+
+---
+
+
 
 # Contributing
 
