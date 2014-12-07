@@ -20,8 +20,15 @@ angular.module('angular-remote-logger')
   )
   .config(
   function (LOG_LOGGER_CONFIG) {
-    LOG_LOGGER_CONFIG.enabled = true;
     LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url';
+    LOG_LOGGER_CONFIG.enabled = {
+      global: true,
+      warn : true,
+      error : true,
+      info : true,
+      log : true,
+      debug : true
+    }
   }
 );
 

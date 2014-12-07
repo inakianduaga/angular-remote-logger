@@ -16,6 +16,13 @@ angular.module('angular-remote-logger')
   })
   .constant('LOG_LOGGER_CONFIG', {
     remoteLogUrl : 'localhost',
-    enabled: true
+    enabled: {
+      global: true,
+      warn : true,
+      error : true,
+      info : true,
+      log : true,
+      debug : true
+    }
   });
 

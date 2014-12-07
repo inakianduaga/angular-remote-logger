@@ -52,6 +52,18 @@ angular.module('angular-remote-logger')
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the exception message & cause 
+ 
+```json
+data : {
+  exception : exception,
+  cause : cause
+}
+```
+
+
 ---
 
 # Http Xhr error logger
@@ -72,6 +84,15 @@ angular.module('angular-remote-logger')
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the entire xhr rejection json object 
+ 
+```json
+data: rejection
+```
+
+
 ---
 
 # Log logger
@@ -87,9 +108,27 @@ angular.module('angular-remote-logger')
   .config(
     function (LOG_LOGGER_CONFIG) {
       LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url'; //remote log endpoint
-      LOG_LOGGER_CONFIG.enabled = false; //disables the log-logger
+      LOG_LOGGER_CONFIG.enabled = {
+        global: true, //global flag to disable remote logging for all log operations 
+        warn : true, //toggle logging for individual log operations.
+        error : true,
+        info : true,
+        log : true,
+        debug : true
+      }
     }
   );
+```
+
+#### Remote Payload
+
+The remote logger will POST the log message, along with the log type: 
+ 
+```json
+data:   {
+  message: message,
+  logType: logType // info/log/debug/error/warn
+}
 ```
 
 ---
