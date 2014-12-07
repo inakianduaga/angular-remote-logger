@@ -1,22 +1,25 @@
-angular-remote-logger  [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
+angular-remote-logger  
 =====================
 
-Angular Exception/XHR ($log todo) remote logger
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][depstat-image]][depstat-url] [![Dev Dependency Status][depstat-dev-image]][depstat-dev-url] [![Bower version][bower-image]][bower-url]
+
+
+Angular Exception/failed XHR call/$log remote logger
 
 # Installation
 
 #### Bower
 
 - Add `angular-remote-logger` as a bower dependency (with the desired version). 
-- Reference `angular-remote-logger.min.js` file (or better use a bower script injector `main-bower-files` using grunt/gulp)  
+- Reference `angular-remote-logger.min.js` file (or better yet, use a bower script injector such as `main-bower-files` for grunt/gulp to automatically add the dependency)  
  
 #### Manually
  
-Copy the file angular `dist/angular-remote-logger.min.js` into your project 
+Copy the file angular `dist/angular-remote-logger.min.js` into your project and reference it in your app.
 
 # Usage
 
-Add module `angular-remote-logger` as a dependency to your app. For example:
+Add the angular module `angular-remote-logger` as a dependency to your app. For example:
 
 ```js
 angular.module('myApp', ['angular-remote-logger', ...]);
@@ -44,15 +47,28 @@ angular.module('angular-remote-logger')
       EXCEPTION_LOGGER_CONFIG.windowInSeconds = 5; //defines the window interval for the throttle checking
       EXCEPTION_LOGGER_CONFIG.maxExceptionsPerWindow = 4; //how many exceptions per window are logged before throttling
       EXCEPTION_LOGGER_CONFIG.remoteLogUrl = 'exception/Logger/Config/Remote/Url'; //remote log endpoint
+      EXCEPTION_LOGGER_CONFIG.enabled = false; //disables the exception logger
     }
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the exception message & cause 
+ 
+```json
+data : {
+  exception : exception,
+  cause : cause
+}
+```
+
+
 ---
 
-# Http Xhr error logging
+# Http Xhr error logger
 
-Log non-200 xhr responses remotely
+Log all non-200 xhr responses remotely
 
 #### Configuration
 
@@ -63,11 +79,61 @@ angular.module('angular-remote-logger')
   .config(
     function (XHR_LOGGER_CONFIG) {
       XHR_LOGGER_CONFIG.remoteLogUrl = 'xhr/Logger/Config/Remote/Url'; //remote log endpoint
+      XHR_LOGGER_CONFIG.enabled = false; //disables the xhr-logger
     }
   );
 ```
 
+#### Remote Payload
+
+The remote logger will POST the entire xhr rejection json object 
+ 
+```json
+data: rejection
+```
+
+
 ---
+
+# Log logger
+
+Log all $log call messages remotely
+
+#### Configuration
+
+The parameters can be modified by changing the values of the constant `LOG_LOGGER_CONFIG`, as follows
+
+```js
+angular.module('angular-remote-logger')
+  .config(
+    function (LOG_LOGGER_CONFIG) {
+      LOG_LOGGER_CONFIG.remoteLogUrl = 'log/Logger/Config/Remote/Url'; //remote log endpoint
+      LOG_LOGGER_CONFIG.enabled = {
+        global: true, //global flag to disable remote logging for all log operations 
+        warn : true, //toggle logging for individual log operations.
+        error : true,
+        info : true,
+        log : true,
+        debug : true
+      }
+    }
+  );
+```
+
+#### Remote Payload
+
+The remote logger will POST the log message, along with the log type: 
+ 
+```json
+data:   {
+  message: message,
+  logType: logType // info/log/debug/error/warn
+}
+```
+
+---
+
+
 
 # Contributing
 
